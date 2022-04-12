@@ -8,6 +8,8 @@ namespace ProjectsAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
+    [Authentication.Authorization]
     public class EmployeesController : ControllerBase
     {
         EmployeesDataAccess da;

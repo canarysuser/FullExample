@@ -35,6 +35,15 @@ namespace ProjectsAPI
             });
             services.AddScoped<ProjectsDataAccess.EmployeesDataAccess>();
             //services.AddScoped<ProjectsDataAccess.ProjectsDAL>();
+
+
+            //configure the service to inject the appSettings 
+            services.Configure<Authentication.AppSettings>(Configuration.GetSection("AppSettings"));
+
+            //.NET 6.0 
+            //builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -54,7 +63,8 @@ namespace ProjectsAPI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+            app.UseMiddleware<Authentication.JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
